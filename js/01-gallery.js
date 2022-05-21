@@ -30,13 +30,18 @@ const viewBigImg = (e) => {
   }
 
   let bigImgSrc = e.target.dataset.source;
-  basicLightbox
-    .create(
-      `
+  const instance = basicLightbox.create(
+    `
       <img width="1280" height="854" src=${bigImgSrc}>
     `
-    )
-    .show();
+  );
+
+  instance.show();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      instance.close();
+    }
+  });
 };
 
 gallery.addEventListener("click", viewBigImg);
